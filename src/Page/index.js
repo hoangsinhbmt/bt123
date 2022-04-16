@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import Bot from "./Bot/Bot";
 import Player from "./Player/Player";
 
@@ -9,14 +9,21 @@ export default function TroChoi() {
   const [chooseimg, setChooseImg] = useState();
   const [game, setGame] = useState(0);
   const [point, setPoint] = useState(0);
-  const handlePlay = () => {
+  const HandlePlay = () => {
     const randNum = Math.floor(Math.random() * 3);
     setRandImg(num[randNum]);
     setGame(game + 1);
-    if (chooseimg == 'keo' && randimg == 'bao' || chooseimg == 'bua' && randimg == 'keo' || chooseimg == 'bao' && randimg == 'bua') {
+  };
+  useEffect(() => {
+    console.log(123);
+    if (
+      (chooseimg === "keo" && randimg === "bao") ||
+      (chooseimg === "bua" && randimg === "keo") ||
+      (chooseimg === "bao" && randimg === "bua")
+    ) {
       setPoint(point + 1);
     }
-  };
+  },[randimg]);
   return (
     <div
       className=" bg-white h-screen w-screen bg-no-repeat bg-cover bg-top grid grid-cols-3"
@@ -37,7 +44,7 @@ export default function TroChoi() {
         </div>
         <button
           className="bg-green-600 hover:bg-green-700 text-white font-bold md:text-lg text-base py-2 px-4 rounded"
-          onClick={handlePlay}
+          onClick={HandlePlay}
         >
           {" "}
           Play game
